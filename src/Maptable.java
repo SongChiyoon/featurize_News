@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Queue;
 
 /**
- * Created by songchiyun on 2017. 4. 11..
+ * Created by songchiyun on 2017. 4. 12..
  */
 public class Maptable {
 
