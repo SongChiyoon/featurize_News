@@ -3,7 +3,7 @@ kkma = Kkma()
 
 fileName = []
 for i in range(5):
-    fileName.append("HKIB-20000_00" +str(i+1)+ ".txt")
+    fileName.append("../data/HKIB-20000_00" +str(i+1)+ ".txt")
     print(fileName[i])
 map = {}
 map["건강과 의학"] =  0
