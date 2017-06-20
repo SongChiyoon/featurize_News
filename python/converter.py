@@ -3,7 +3,7 @@ kkma = Kkma()
 
 fileName = []
 for i in range(5):
-    fileName.append("../data/HKIB-20000_00" +str(i+1)+ ".txt")
+    fileName.append("data/HKIB-20000_00" +str(i+1)+ ".txt")
     print(fileName[i])
 map = {}
 map["건강과 의학"] =  0
@@ -20,5 +20,11 @@ count = [0] * 8
 for T in range(1):
     f = open(fileName[T], 'r')
     for line in f:
-        list = kkma.nouns(line)
-        print(list)
+        if "<KW>" in line:
+            print(line)
+            for skip in f:
+                if "@" in skip:
+                    print(skip + 'find')
+
+        #list = kkma.nouns(line)
+        #print(list)
