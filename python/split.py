@@ -1,4 +1,17 @@
-from konlpy.tag import Kkma
-kkma = Kkma()
-list = kkma.nouns('대학에서 DB, 통계학, 이산수학, 이산수학 등을 배웠지만')
-print(list)
+#from konlpy.tag import Kkma
+
+
+a = "015"
+
+print(a.isdigit())
+
+a = [0 for i in range(6)]
+
+print(a)
+
+for i in range(10):
+    print(i)
+
+table = [[0] * 10 for i in range(2)]
+table[1][2] = 100
+print(table)

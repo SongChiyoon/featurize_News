@@ -15,7 +15,7 @@ class mapTable(object):
     def getTable(self):
         return self.table
 
-    def addCount(self, category, feature):
+    def _addCount(self, category, feature):
         position = self._getIndex(feature)
         if position == self.index:
             self.table[category][position] = 1
@@ -32,7 +32,7 @@ class mapTable(object):
             return self.index
 
     #use konlp libray
-    def split(self, text):
+    def split(self, category, text):
         kkma = Kkma()
         feature = kkma.nouns(text)
         return feature
