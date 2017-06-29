@@ -1,45 +1,7 @@
 from konlpy.tag import Kkma
-class mapTable(object):
+import chiSquare
+import mapTable
 
-    def __init__(self):
-        self.kkma = Kkma()
-        self.table = [[0] * 8 for i in range(10000000)]
-        self.index = 0
-        self.map = {}
-        self.Index2String = {}
-
-    def getMap(self):
-        return self.map
-
-    def getTable(self):
-        return self.table
-
-    def addCount(self, category, feature):
-        position = self._getIndex(feature)
-        print(category, ":",feature)
-
-        if position == self.index:
-            self.table[position][category] = 1
-            self.map[feature] =  position
-            self.Index2String[position] = feature
-            self.index += 1
-        else:
-            self.table[position][category] += 1
-
-    def getIndex(self):
-        return self.index
-
-    def _getIndex(self, feature):
-        if feature in map.keys():
-            return map[feature]
-        else:
-            return self.index
-
-    #use konlp libray
-    def split(self, text):
-        kkma = Kkma()
-        feature = kkma.nouns(text)
-        return feature
 #skip blank line
 def nonblank_lines(f):
     for l in f:
@@ -65,22 +27,27 @@ map["여가생활"] = 7
 
 count = [0] * 8
 skip = False
-makeTable = mapTable()
+makeTable = mapTable.mapTable()
 cat = -1
 
 news = ""
 numberOfCat = [0 for i in range(8)]
-
-for T in range(4):
+ck = 0
+for T in range(1):
     with open(fileName[T], 'r') as f:
+    #with open("data/test.txt", 'r') as f:
         for line in nonblank_lines(f):
             if "@DOCUMENT" in line:
                 if news != "":
                     result = makeTable.split(news)
                     for feature in result:
-                        if feature.isdigit():
+                        featureLength = len(feature)
+                        if feature.isdigit() :
                             continue
-                        makeTable.addCount(category=cat, feature=feature)
+                        if  featureLength >= 2 and featureLength <= 5:
+                            makeTable.addCount(category=cat, feature=feature)
+                    print(ck)
+                    ck += 1
                     news = ""
 
                 ne = next(f)
@@ -88,7 +55,7 @@ for T in range(4):
                 cat = ne.split('/')[1]
                 cat = map[cat]
                 numberOfCat[cat] += 1
-                print(T,":",cat)
+               # print(T,":",cat)
                 ne = next(f)
                 ne = next(f)
                 ne = next(f)
@@ -98,5 +65,23 @@ for T in range(4):
 
 table = makeTable.getTable()
 
+m = makeTable.getMap()
+index = makeTable.getIndex()
+chi = chiSquare.ChiSquare(table=table,numberOfCat = numberOfCat,index=index, cat = 8)
+chiQueue = chi.chiResult()
+resultMap = {}
+features = []
+newIndex = 0
 
-
+f = open("check.txt","w")
+for i in (1, index):
+    f.write("index : %d (%s)"%(i, m[i]))
+print(table)
+'''
+while not chiQueue.empty():
+    f = chiQueue.get()
+    f.setNewIndex(newIndex)
+    features.append(f)
+    resultMap[m[f.getIndex]] = newIndex
+    print(m[f.getIndex], ":",f.getWeight,"여기야")
+    newIndex += 1'''

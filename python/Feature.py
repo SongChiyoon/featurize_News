@@ -1,4 +1,4 @@
-class Feature(object):
+class feature(object):
     def __init__(self, weight, index):
         self.weight = weight
         self.index = index
@@ -7,7 +7,7 @@ class Feature(object):
     def getWeight(self):
         return self.weight
 
-    def setNewindex(self, newIndex):
+    def setNewIndex(self, newIndex):
         self.newIndex = newIndex
 
     @property

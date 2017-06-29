@@ -13,5 +13,7 @@ for i in range(10):
     print(i)
 
 table = [[0] * 10 for i in range(2)]
+
+
 table[1][2] = 100
 print(table)
